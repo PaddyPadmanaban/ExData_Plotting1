@@ -1,0 +1,37 @@
+## Plot 4 Project 1 Exp Data Analysis
+## Read the required data in (Only the 2 dates of interest)
+sel1 <- read.csv.sql("C:/Users/Padma/Documents/Coursera/ExpDataAnalysis/household_power_consumption.txt",   sql = "select  *  from file  where (Date = '1/2/2007' or date =  '2/2/2007') ", sep = ";")
+########## Set up for 4 plots
+par(mfrow = c(2,2))
+########## Set up the plot (top left)
+plot(as.POSIXct(paste(sel1$Date, sel1$Time), format="%d/%m/%Y %H:%M:%S"),sel1$Global_active_power,type='n',xlab="", ylab="")
+## Add labels
+title(ylab="Global Active Power (Kilowatts)", xlab = "")
+## Add the line
+lines(as.POSIXct(paste(sel1$Date, sel1$Time),format="%d/%m/%Y %H:%M:%S"),sel1$Global_active_power )
+########## Set up the plot (bottom left)
+plot(as.POSIXct(paste(sel1$Date, sel1$Time), format="%d/%m/%Y %H:%M:%S"),sel1$Sub_metering_1,type='n',xlab="", ylab="")
+## Add labels
+title(ylab="Global Active Power (Kilowatts)", xlab = "")
+## Add the line
+lines(as.POSIXct(paste(sel1$Date, sel1$Time),format="%d/%m/%Y %H:%M:%S"),sel1$Sub_metering_1 )
+lines(as.POSIXct(paste(sel1$Date, sel1$Time),format="%d/%m/%Y %H:%M:%S"),sel1$Sub_metering_2, col="red" )
+lines(as.POSIXct(paste(sel1$Date, sel1$Time),format="%d/%m/%Y %H:%M:%S"),sel1$Sub_metering_3, col= "blue" )
+legend("topright", lwd=1, lty=c(1), cex=0.5,col = c("black","red","blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+########## Set up the plot (top right)
+########## Set up the plot (top left)
+plot(as.POSIXct(paste(sel1$Date, sel1$Time), format="%d/%m/%Y %H:%M:%S"),sel1$Voltage,type='n',xlab="", ylab="")
+## Add labels
+title(ylab="Voltage", xlab = "Datetime")
+## Add the line
+lines(as.POSIXct(paste(sel1$Date, sel1$Time),format="%d/%m/%Y %H:%M:%S"),sel1$Voltage )
+
+########## Set up the plot (bottom right)
+plot(as.POSIXct(paste(sel1$Date, sel1$Time), format="%d/%m/%Y %H:%M:%S"),sel1$Global_reactive_power,type='n',xlab="", ylab="")
+## Add labels
+title(ylab="Global_reactive_power", xlab = "Datetime")
+## Add the line
+lines(as.POSIXct(paste(sel1$Date, sel1$Time),format="%d/%m/%Y %H:%M:%S"),sel1$Global_reactive_power )
+## Create the png version
+dev.copy(png,file="C:/Users/Padma/Documents/Coursera/ExpDataAnalysis/plot4.png")
+dev.off()
